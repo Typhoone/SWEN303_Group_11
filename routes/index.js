@@ -25,6 +25,7 @@ router.get('/db', function (request, response) {
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
+  res.send
 });
 
 module.exports = router;

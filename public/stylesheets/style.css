@@ -1,0 +1,119 @@
+*{
+	font-family: 'Roboto', 'Noto', sans-serif;
+	color: #000000;
+}
+hr{
+	border: none;
+	height: 3px;
+	/* Set the hr color */
+	color: #333; /* old IE */
+	background-color: #333; /* Modern Browsers */
+}
+h1{
+	font-size: 64px;
+	text-align: center;
+}
+
+h2{
+	font-size: 48px;
+	text-align: center;
+	overflow: auto;
+}
+
+/*The 3 colors for our site are:
+	- #B2D234 - Green
+	- #776B5D - Browny/Grey
+	- #A7A9AC - Grey
+	*/
+
+	.invisible{	/* A class to simply keep the HTML, which I copy over to the collapse, to be invisible. */
+		display: none;
+		margin: 16px;
+	}
+
+	.text{
+		font-weight: 200;
+		margin: 16px;
+		color: #000000;
+	}
+
+	.spacer{
+		flex: 1;
+	}
+
+	#main{
+		margin-right: -8px;
+		margin-left: -8px;
+		min-height: 50px;
+		min-width: 50px;
+		border: 3px solid #333;
+		background-color: #eee;
+	}
+
+	#toolbar{
+		background: #B2D234;
+		margin-right: -8px;
+		margin-left: -8px;
+		margin-top: -8px;
+	}
+
+	#logo{
+		max-width: 100%; 
+		max-height: 100%;
+	}
+
+	#searchDiv{
+		flex: 1;
+	}
+
+	#searchButton{
+		max-height: 60%;
+		max-width: 60%;
+	}
+
+	#sign-in-button{
+		max-width: 50%; 
+		max-height: 50%; 
+		font-size: xx-small;
+		float: right;
+		margin-left: 16px;
+		background-color: #A7A9AC;
+	}
+
+	#collapse{
+		margin-top: 4px;
+		font-weight: 200;
+	}
+
+	#animationContainer{
+		margin: 0 auto;
+	}
+
+	#content{
+		padding: 8px;
+	}
+
+	/*Below here I am simply saving some useful css from my previous project that I think I will probably need later.*/
+	#title{
+		display: inline-block;
+		margin-left: 16px;
+		flex: 1;
+	}
+	.rate-content{ /* Background image on paper-card, fade it to become a tad darker. */
+		background-image: linear-gradient(
+			rgba(0, 0, 0, 0.6),
+			rgba(0, 0, 0, 0.6)
+			),
+		url('../images/dark_tile.jpg');
+		border-bottom-left-radius: 5px;
+	/*overflow: hidden; Can't hide overflow because it affects tooltips. Doesn't seem to affect 
+	image anyway.*/
+}
+
+#animationText{
+	margin: 0 auto;
+	overflow: hidden;
+	white-space: nowrap;
+	pointer-events: none;
+	/*-webkit-animation-delay: 5s;*/
+}

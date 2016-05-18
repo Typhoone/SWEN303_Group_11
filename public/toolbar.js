@@ -3,44 +3,27 @@
 
   var app = document.querySelector('#app');
   window.addEventListener('WebComponentsReady', function() {
-    var animationArray = ['Buy!', 'Sell!', 'That\'s it!', 'No nonsense!', 'Free to use!'];
-    var animationTxt = document.getElementById('animationText');
-    var animationIndex = 0;
-    var animationDelay = 500;
 
-    var noSearch = true; 
+
+        var noSearch = true; 
     var searchField = document.getElementById('search');
     var searchedFor = document.getElementById('searchedFor');
     var searchResultsContainer = document.getElementById('searchResultsContainer');
     var noSearch = document.getElementById('emptySearchMessage');
     var previousSearch = '';
 
-
-    var collapseToggled = false;
+   var collapseToggled = false;
     var collapse = document.getElementById('collapse');
 
+    var animationDelay = 500;
+
+
     app.toggle = function(){
-      console.log('here1');
       collapseToggled = !collapseToggled;
       collapse.toggle();
     }
 
-    app.animateText = function(){
-      animationTxt.innerHTML = animationArray[animationIndex];
-      animationTxt.className = 'animated fadeInUp';
-      animationIndex += 1;
-      if(animationIndex == animationArray.length){
-        animationIndex = 0;
-      }
-      setTimeout(function(){
-        animationTxt.className = 'animated fadeOutUp';
-        setTimeout(function(){
-          app.animateText();
-        }, 2000);
-      }, 3000);
-    }
-
-    app.ensureCollapsed = function(){
+      app.ensureCollapsed = function(){
       if(collapseToggled){app.toggle();}
     }
 
@@ -95,7 +78,7 @@
     }
 
     //After everything is loaded and finished run these methods.
-    app.animateText();
+
   });  
 })(document);
 

@@ -11,6 +11,7 @@
   <link rel="import" href="bower_components/iron-icons/iron-icons.html">
   <link rel="import" href="bower_components/paper-input/paper-input.html">
   <link rel="import" href="bower_components/paper-material/paper-material.html">
+  <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
   <link rel="stylesheet" type="text/css" href="stylesheets/animate.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 
@@ -30,15 +31,18 @@
     <paper-toolbar id="toolbar">
     <img src="./images/trader_logo.png" alt="Trader" id="logo">
     <div id="title" class="title">Trader</div>
+    <paper-dropdown-menu label="Menu">
+  <paper-listbox class="dropdown-content">
+    <paper-item>Home</paper-item>
+    <paper-item>Browse</paper-item>
+    <paper-item>Sell</paper-item>
+    <paper-item>Help</paper-item>
+  </paper-listbox>
+</paper-dropdown-menu>
     <paper-icon-button raised noink id="searchButton" icon="icons:search" title="Search" on-tap="search"></paper-icon-button>
     <div id="searchDiv"><paper-input type="search" id="search" label="Search here..."></paper-input></div>       
     <paper-button raised noink id="sign-in-button">Sign In</paper-button>
   </paper-toolbar>
-  <paper-material id="main">
-  <div id="animationContainer">
-    <h1 id="animationText"></h1>
-  </div>
-  <hr>
   <iron-collapse id="collapse"></iron-collapse>
 </paper-material id="content">
 <div id="searchResultsContainer" class="invisible">
@@ -53,11 +57,8 @@
     <h2>You didn't search for anything!</h2>
   </div>
 </div>
-<!-- <div id="editable">
-  <iron-collapse id="collapse"></iron-collapse>
-</div> -->
 </template>
 <!-- Run the JS -->
-<script src="main.js"></script>
+<script src="toolbar.js"></script>
 </body>
 </html>

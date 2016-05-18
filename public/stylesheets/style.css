@@ -37,10 +37,6 @@ h2{
 		color: #000000;
 	}
 
-	.spacer{
-		flex: 1;
-	}
-
 	#main{
 		margin-right: -8px;
 		margin-left: -8px;
@@ -72,8 +68,8 @@ h2{
 	}
 
 	#sign-in-button{
-		max-width: 50%; 
-		max-height: 50%; 
+		max-width: 100%; 
+		max-height: 100%; 
 		font-size: xx-small;
 		float: right;
 		margin-left: 16px;

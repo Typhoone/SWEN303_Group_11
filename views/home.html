@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Trader</title>
+  <script src="bower_components/webcomponentsjs/webcomponents.js"></script> 
+  <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+  <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="bower_components/iron-collapse/iron-collapse.html">
+  <link rel="import" href="bower_components/paper-button/paper-button.html">
+  <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+  <link rel="import" href="bower_components/paper-input/paper-input.html">
+  <link rel="import" href="bower_components/paper-material/paper-material.html">
+  <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+  <link rel="stylesheet" type="text/css" href="stylesheets/animate.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+
+  <!-- To style any of Polymer's custom properties it must be done 
+  here as most browsers still have issues with custom proprties. -->
+  <style is="custom-style">
+    #search{
+      --paper-input-container-focus-color: #333;
+      max-width: 100%;
+      min-width: 100%;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+  <template is="dom-bind" id="app">
+  <paper-material id="main">
+  <div id="animationContainer">
+    <h1 id="animationText"></h1>
+  </div>
+</template>
+<!-- Run the JS -->
+<script src="home.js"></script>
+</body>
+</html>
+
+
+
+
+

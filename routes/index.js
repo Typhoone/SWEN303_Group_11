@@ -20,7 +20,12 @@ router.get('/db', function (request, response) {
       });
     }
   });
-})
+});
+
+router.get('/signup', function(req, res, next) {
+  res.render('signup', { title: 'Register' });
+  res.send
+});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

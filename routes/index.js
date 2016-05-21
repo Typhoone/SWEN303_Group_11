@@ -73,7 +73,7 @@ router.post('/signIN', function(req, res, next) {
         if (err)
          { console.error(err); res.send("Error " + err); }
         else{
-          res.render('index', { title: 'Trader' id: result.id});
+          res.render('index', { title: 'Trader', id: result.id});
           res.send
         }
       });

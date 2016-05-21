@@ -14,25 +14,25 @@ block content
 
 	.col-xs-3
 	.col-xs-6
-		form(action="/db", method="get")
+		form(action="/signupSubmit", method="post")
 			.form-group
 				label(for='email') Email address
-				input#email.form-control(type='email', placeholder='Email')
+				input#email.form-control(type='email', placeholder='Email' name="email")
 			.form-group
 				label(for='pass') Password
-				input#pass.form-control(type='Password', placeholder='password')
+				input#pass.form-control(type='Password', placeholder='password' name="pass")
 			.form-group
 				label(for='fname') First Name
-				input#fname.form-control(type='text', placeholder='John')
+				input#fname.form-control(type='text', placeholder='John' name="fname")
 			.form-group
 				label(for='lname') Last Name
-				input#lname.form-control(type='text', placeholder='Snow')
+				input#lname.form-control(type='text', placeholder='Snow' name="lname")
 			.form-group
 				label(for='phone') Phone Number
-				input#phone.form-control(type='tel', placeholder='020 000 0000')
+				input#phone.form-control(type='tel', placeholder='020 000 0000' name="phone")
 			.form-group
 				label(for='addr') Address
-				input#addr.form-control(type='text', placeholder='Castle Black, The Wall, Westeros')
+				input#addr.form-control(type='text', placeholder='Castle Black, The Wall, Westeros' name="addr")
 			button.btn.btn-default(type="submit", name="submitBtn") Submit
 		.col-xs-3
 				

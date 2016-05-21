@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var pg = require('pg');
+var escape = require('pg-escape')
 
 DATABASE_URL = "postgres://qczjndeqrgzuke:hwrYaoDiY6dy81EZElhbrrwNGm@ec2-54-227-240-164.compute-1.amazonaws.com:5432/da1pqqn7h9sfln";
 
@@ -22,9 +23,39 @@ router.get('/db', function (request, response) {
   });
 });
 
+//Load signup page
 router.get('/signup', function(req, res, next) {
   res.render('signup', { title: 'Register' });
   res.send
+});
+//run signup query
+router.post('/signupSubmit', function(req, res, next) {
+  email = req.body.email;
+  pass = req.body.pass;
+  fname = req.body.fname;
+  lname = req.body.lname;
+  phone = req.body.phone;
+  addr = req.body.addr;
+
+  sql = escape("INSERT INTO users (id, email, first_name, last_name, phone, address, pass) VALUES (default,'" + email + "','" + fname  + "','" + lname + "'," + phone + ",'" + addr + "','" + pass + "');");
+
+  pg.connect(DATABASE_URL, function(err, client, done) {
+    if (err)
+     { console.error(err); res.send("Error " + err); }
+    else{
+      client.query(sql, function(err, result) {
+        done();
+        if (err)
+         { console.error(err); res.send("Error " + err); }
+        else{
+          res.render('signup', { title: 'Register' });
+          res.send
+        }
+      });
+    }
+  });
+
+
 });
 
 /* GET home page. */

@@ -58,6 +58,11 @@ router.post('/signupSubmit', function(req, res, next) {
 
 });
 
+router.get('/sell', function(req, res, next) {
+  res.render('sell', { title: 'Sell' });
+  res.send
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Trader' });

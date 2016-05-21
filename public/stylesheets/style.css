@@ -51,7 +51,7 @@ h2{
 		background: #B2D234;
 		margin-right: -8px;
 		margin-left: -8px;
-		margin-top: -8px;
+		margin-top: 0px;
 	}
 
 	#logo{
@@ -68,22 +68,14 @@ h2{
 		max-width: 60%;
 	}
 
-	#sign-in-button{
-		max-width: 100%; 
-		max-height: 100%; 
-		font-size: xx-small;
-		float: right;
-		margin-left: 16px;
-		background-color: #A7A9AC;
+	#buttons{
+		max-height: 60%;
+		margin-left: 8px;
 	}
 
 	#collapse{
 		margin-top: 4px;
 		font-weight: 200;
-	}
-
-	#animationContainer{
-		margin: 0 auto;
 	}
 
 	#content{

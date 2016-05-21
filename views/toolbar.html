@@ -15,6 +15,10 @@
   <link rel="import" href="bower_components/paper-item/paper-item.html">
   <link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+  <script src='https://code.jquery.com/jquery-2.2.3.min.js', integrity='sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=', crossorigin='anonymous'></script>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous'>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous'></script>
+
 
   <!-- To style any of Polymer's custom properties it must be done 
   here as most browsers still have issues with custom proprties. -->
@@ -41,8 +45,12 @@
       </paper-listbox>
     </paper-dropdown-menu>
     <paper-icon-button raised noink id="searchButton" icon="icons:search" title="Search" on-tap="search" onclick="search"></paper-icon-button>
-    <div id="searchDiv"><paper-input type="search" id="search" label="Search here..."></paper-input></div>       
-    <paper-button raised noink id="sign-in-button">Sign In</paper-button>
+    <div id="searchDiv"><paper-input type="search" id="search" label="Search here..."></paper-input></div>
+    <div class="btn-group btn-group-vertical" id="buttons">
+      <button id="sign-in-button" class="btn btn-xs">Sign In</button>
+      <button id="sign-up-button" class="btn btn-xs">Sign Up</button>
+    </div>
+    <!--     <paper-button raised noink id="sign-in-button">Sign In</paper-button> -->
   </paper-toolbar>
   <paper-material id="main">
     <iron-collapse id="collapse"></iron-collapse>
@@ -75,7 +83,10 @@
 
     var animationDelay = 500;
 
-    var btn = document.getElementById('searchButton');
+    var searchBtn = document.getElementById('searchButton');
+    var signInBtn = document.getElementById('sign-in-button');
+    var signUpBtn = document.getElementById('sign-up-button');
+
     var menu = document.getElementById('menu');
 
 
@@ -101,11 +112,11 @@
     }
 
     signIn= function(){
-      //TODO Imperatively create a sign-in dialog box and appropriate sanity checks.
+      //TODO sign-in logic
     }
 
     signUp = function(){
-      //TODO Imperatively create a sign-up dialog box and perform sanity checks.
+      window.location = "/signup";
     }
 
     menuUsed = function(){
@@ -153,7 +164,9 @@
       previousSearch = currentSearch;
     }
 
-    btn.addEventListener("click", search);
+    searchBtn.addEventListener("click", search);
+    signUpBtn.addEventListener("click", signUp);
+    signInBtn.addEventListener("click", signIn);
     menu.addEventListener("iron-select", menuUsed);
   }
 

@@ -141,11 +141,12 @@
     }
 
     checkSignedIn = function(){
-      var username=getCookie("username");
-      if (username!="") {
+      var username = getCookie("username");
+      if (username != "") {
         signInBtn.className = "invisible";
         signUpBtn.className = "invisible";
         usernameBtn = "btn btn-xs";
+        usernameBtn.innerHTML = username;
         signOutBtn = "btn btn-xs";
       }else{
         signInBtn.className = "btn btn-xs";

@@ -94,7 +94,7 @@ h2{
 	#title{
 		display: inline-block;
 		margin-left: 16px;
-		flex: 1;
+		flex: 2;
 	}
 	.rate-content{ /* Background image on paper-card, fade it to become a tad darker. */
 		background-image: linear-gradient(

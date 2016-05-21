@@ -5,14 +5,14 @@
   window.addEventListener('WebComponentsReady', function() {
 
 
-        var noSearch = true; 
+    var noSearch = true; 
     var searchField = document.getElementById('search');
     var searchedFor = document.getElementById('searchedFor');
     var searchResultsContainer = document.getElementById('searchResultsContainer');
     var noSearch = document.getElementById('emptySearchMessage');
     var previousSearch = '';
 
-   var collapseToggled = false;
+    var collapseToggled = false;
     var collapse = document.getElementById('collapse');
 
     var animationDelay = 500;
@@ -23,7 +23,7 @@
       collapse.toggle();
     }
 
-      app.ensureCollapsed = function(){
+    app.ensureCollapsed = function(){
       if(collapseToggled){app.toggle();}
     }
 
@@ -52,6 +52,7 @@
     }
 
     app.search = function(){
+      console.log(collapseToggled);
       var currentSearch = searchField.value;
       console.log('\''+currentSearch+'\'');
       console.log(currentSearch == '');

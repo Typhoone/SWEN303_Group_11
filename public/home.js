@@ -26,4 +26,4 @@
     }
 
        app.animateText();
-  });
+  })(document);

@@ -1,0 +1,37 @@
+extends layout
+
+block content
+	include toolbar.html
+	include home.html
+	// Latest jquery
+	script(src='https://code.jquery.com/jquery-2.2.3.min.js', integrity='sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=', crossorigin='anonymous')
+	// Latest compiled and minified CSS
+	link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
+	// Optional theme
+	link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css', integrity='sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r', crossorigin='anonymous')
+	// Latest compiled and minified JavaScript
+	script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
+
+	.col-xs-3
+	.col-xs-6
+		form(action="/db", method="get")
+			.form-group
+				label(for='name') Product Name
+				input#name.form-control(type='text', placeholder='Name')
+			.form-group
+				label(for='description') Product Description
+				textarea#description.form-control(rows='10', placeholder='Description')
+			.form-group
+				label(for='price') Product Price
+				input#price.form-control(type='number', min='1', value='10')
+			.form-group
+				label(for='category') Product Category
+				select#category.form-control(name='Category')
+					option(value='one') One
+					option(value='two') Two
+					option(value='three') Three
+			.form-group
+				label(for='image') Product Image
+				input#image.form-control(type='file', name='Image', accept='image/*')
+			button.btn.btn-default(type="submit", name="submitBtn") Submit Product
+		.col-xs-3

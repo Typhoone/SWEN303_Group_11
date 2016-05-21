@@ -58,6 +58,29 @@ router.post('/signupSubmit', function(req, res, next) {
 
 });
 
+router.post('/signIN', function(req, res, next) {
+  email = req.body.email;
+  pass = req.body.password;
+
+  sql = escape("SELECT * FROM users WHERE email='" + email + "' AND pass='" + pass + "';");
+
+  pg.connect(DATABASE_URL, function(err, client, done) {
+    if (err)
+     { console.error(err); res.send("Error " + err); }
+    else{
+      client.query(sql, function(err, result) {
+        done();
+        if (err)
+         { console.error(err); res.send("Error " + err); }
+        else{
+          res.render('index', { title: 'Trader', id: result.id});
+          res.send
+        }
+      });
+    }
+  });
+});
+
 router.get('/sell', function(req, res, next) {
   res.render('sell', { title: 'Sell' });
   res.send

@@ -12,6 +12,8 @@
   <link rel="import" href="bower_components/paper-input/paper-input.html">
   <link rel="import" href="bower_components/paper-material/paper-material.html">
   <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+  <link rel="import" href="bower_components/paper-item/paper-item.html">
+  <link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
   <link rel="stylesheet" type="text/css" href="stylesheets/animate.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 
@@ -27,29 +29,30 @@
   </style>
 </head>
 <body>
-  <template is="dom-bind" id="app">
-    <paper-toolbar id="toolbar">
+  <!-- <template is="dom-bind" id="app"> -->
+  <paper-toolbar id="toolbar">
     <img src="./images/trader_logo.png" alt="Trader" id="logo">
     <div id="title" class="title">Trader</div>
-    <paper-dropdown-menu label="Menu">
-  <paper-listbox class="dropdown-content">
-    <paper-item>Home</paper-item>
-    <paper-item>Browse</paper-item>
-    <paper-item>Sell</paper-item>
-    <paper-item>Help</paper-item>
-  </paper-listbox>
-</paper-dropdown-menu>
-    <paper-icon-button raised noink id="searchButton" icon="icons:search" title="Search" on-tap="search"></paper-icon-button>
+    <paper-dropdown-menu label="Menu" id="menu">
+      <paper-listbox class="dropdown-content">
+        <paper-item>Home</paper-item>
+        <paper-item>Browse</paper-item>
+        <paper-item>Sell</paper-item>
+        <paper-item>Help</paper-item>
+      </paper-listbox>
+    </paper-dropdown-menu>
+    <paper-icon-button raised noink id="searchButton" icon="icons:search" title="Search" on-tap="search" onclick="search"></paper-icon-button>
     <div id="searchDiv"><paper-input type="search" id="search" label="Search here..."></paper-input></div>       
     <paper-button raised noink id="sign-in-button">Sign In</paper-button>
   </paper-toolbar>
-  <iron-collapse id="collapse"></iron-collapse>
+  <paper-material id="main">
+    <iron-collapse id="collapse"></iron-collapse>
+  </paper-material>
 </paper-material id="content">
 <div id="searchResultsContainer" class="invisible">
   <h2>You searched for <span id="searchedFor"></span>. Here's what we found!</h2>
-  <hr>
   <div>
-    
+
   </div>
 </div>
 <div id="noSearch" class="invisible">
@@ -57,8 +60,105 @@
     <h2>You didn't search for anything!</h2>
   </div>
 </div>
-</template>
+<!-- </template> -->
 <!-- Run the JS -->
-<script src="toolbar.js"></script>
+<script type="text/javascript">
+  window.onload = function () {
+    var noSearch = true; 
+    var searchField = document.getElementById("search");
+    var searchedFor = document.getElementById('searchedFor');
+    var searchResultsContainer = document.getElementById('searchResultsContainer');
+    var noSearch = document.getElementById('emptySearchMessage');
+    var previousSearch = '';
+
+    var collapseToggled = false;
+    var collapse = document.getElementById('collapse');
+
+    var animationDelay = 500;
+
+    var btn = document.getElementById('searchButton');
+    var menu = document.getElementById('menu');
+
+
+    toggle = function(){
+      collapseToggled = !collapseToggled;
+      collapse.toggle();
+    }
+
+    ensureCollapsed = function(){
+      if(collapseToggled){toggle();}
+    }
+
+    ensureOpened = function(){
+     if(!collapseToggled){toggle();} 
+   }
+
+   query = function(text){
+      //TODO search the database.
+    }
+
+    displayResults = function(){
+      //TODO display the results which will be in a JSON format of our choosing.
+    }
+
+    signIn= function(){
+      //TODO Imperatively create a sign-in dialog box and appropriate sanity checks.
+    }
+
+    signUp = function(){
+      //TODO Imperatively create a sign-up dialog box and perform sanity checks.
+    }
+
+    menuUsed = function(){
+      switch(menu.selectedItemLabel){
+        case "Home":
+        window.location = "/";
+        break;
+        case "Browse":
+        window.location = "/Browse";
+        break;
+        case "Sell":
+        window.location = "/Sell";
+        break;
+        case "Help":
+        window.location = "/Help";
+        break;
+        default:
+        console.log("Should never get here. (menu)");
+      }
+      console.log(menu.selectedItemLabel);
+    }
+
+    search = function(){
+      console.log(collapseToggled);
+      var currentSearch = searchField.value;
+      ensureCollapsed();
+      if(currentSearch == ''){
+        setTimeout(function(){ 
+          collapse.innerHTML = noSearch.innerHTML;
+          ensureOpened();
+        }, animationDelay);
+      }else if(currentSearch == previousSearch){
+        setTimeout(function(){
+          ensureOpened();
+        }, animationDelay);
+      }else{
+        var results = query(currentSearch);
+        searchedFor.innerHTML = currentSearch;        
+        setTimeout(function(){ 
+          displayResults(results);
+          collapse.innerHTML = searchResultsContainer.innerHTML;
+          ensureOpened();
+        }, animationDelay);
+      }
+      previousSearch = currentSearch;
+    }
+
+    btn.addEventListener("click", search);
+    menu.addEventListener("iron-select", menuUsed);
+  }
+
+</script>
+<!-- <script src="toolbar.js"></script> -->
 </body>
 </html>

@@ -29,8 +29,19 @@ router.get('/sell', function(req, res, next) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-  res.send
+  res.render('index', { title: 'Trader' });
+});
+
+router.get('/Browse', function(req, res, next) {
+  res.render('browse', {title: 'Trader'});
+});
+
+router.get('/Sell', function(req, res, next) {
+  res.render('sell', {title: 'Trader'});
+});
+
+router.get('/Help', function(req, res, next) {
+  res.render('help', {title: 'Trader'});
 });
 
 module.exports = router;

@@ -83,7 +83,7 @@ router.post('/signInSubmit', function(req, res, next) {
         }
         else{
           // console.log('success\n\n\n\n\n\n')
-          res.render('signin', { title: 'Sign In', result: result.rows[0]});
+          res.render('index', { title: 'Sign In', email: result.rows[0].email, ID: result.rows[0].id});
           res.send
         }
       });

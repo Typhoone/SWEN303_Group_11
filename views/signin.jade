@@ -18,12 +18,13 @@ block content
 		-}
 		-if (typeof(err) !== 'undefined'){
 			.alert.alert-warning
-				strong Error!
+				strong Error! 
 				| #{err}
 		-}
-			
-		-if (typeof(result) !== 'undefined') {
-			script var result = !{JSON.stringify(result)}
+		//- checks for the email and ID vars and if they exist sets them to email and ID, this is only done once log in is successfull
+		-if (typeof(email) !== 'undefined' && typeof(ID) !== 'undefined') {
+			script var email = !{JSON.stringify(email)}
+			script var ID = !{JSON.stringify(ID)}
 		-}
 		
 	

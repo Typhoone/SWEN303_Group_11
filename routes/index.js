@@ -25,9 +25,9 @@ router.get('/db', function (request, response) {
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
-  res.send
+  res.send();
 });
-/*
+
 router.get('/item', function(request, response){
     pg.connect(DATABASE_URL, function(err, client, done){
         if(err){
@@ -35,22 +35,33 @@ router.get('/item', function(request, response){
             response.send("Error " + err);
         }
         else{
-            client.query('Select * FROM test_table WHERE name == ' + req.query.name, function(err, result){
+            client.query('Select * FROM test_table WHERE name = name', function(err, result){
                 done();
                 if(err){
                     console.error(err);
                     response.send("Error " + err);
                 }
                 else{
-                    responce.render('item', {result:result.rows})
+                    var name = "Super awesome random object";
+                    var itemImage = "items";
+                    var description = "This is just a lot of informatoin about the object in general, at the moment all of this information is just a placeholder until i can write the rest of it.";
+                    response.render('item', {result:result.rows, name: name, image: itemImage, description: description });
                 }
-            })
+            });
         }
-    })
+    });
 })
-*/
 
+/*
 router.get('/item', function(req, res, next){
     res.render('item')
 });
+
+*/
+
+router.get('/test', function(req, res, next) {
+    res.render('test', { title: 'Express' });
+});
+
 module.exports = router;
+

@@ -6,10 +6,9 @@ p {
     margin-right: auto
 }
 
-div {
-    display: block;
-    margin-left: auto;
-    margin-right: auto
+.top {
+    height: 80px;
+
 }
  .images{
      display: block;
@@ -17,3 +16,58 @@ div {
      margin-right: auto
 
  }
+
+ .left {
+     height:500px;
+
+
+ }
+
+ .right {
+     background-color: lightgray;
+     border-radius:10px;
+     padding: 5px;
+     height:500px;
+     text-align: left;
+
+ }
+
+ .nothing {
+
+ }
+
+ .bottom {
+
+
+ }
+
+ .divider {
+     width:20px;
+     height:auto;
+     display:inline-block;
+
+ }
+
+ h1,  h3 {
+     color: #00acc1;
+
+ }
+
+
+ .btn {
+
+     width: 200px;
+     font-size: 20px;
+     margin-top: 10px;
+     margin-bottom:10px;
+ }
+
+ .description {
+     background-color: lightgray;
+     border-radius:10px;
+     padding: 5px;
+     height:200px;
+     text-align: left;
+
+ }
+

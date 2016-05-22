@@ -3,24 +3,96 @@ extends layout
 block content
 	include toolbar.html
 
+	script(type="text/javascript").
+		function validateForm(){
+			success = true;
+			formVals = document.forms["signUpForm"];
+			
+			//- email regex
+			var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			if(!re.test(formVals["email"].value)){
+				document.getElementById("emailReg").classList.remove("hidden");
+				success = false;
+			}else{
+				document.getElementById("emailReg").classList.add("hidden");
+			}
+			
+			if(re.test(formVals["email"].value.length > 320)){
+				document.getElementById("emailLen").classList.remove("hidden");
+				success = false;
+			}else{
+				document.getElementById("emailLen").classList.add("hidden");
+			}
+			
+			if(formVals["pass"].value.length < 4 || formVals["pass"].value.length > 50){
+				success = false;
+				document.getElementById("passErr").classList.remove("hidden");
+			}else{
+				document.getElementById("passErr").classList.add("hidden");
+			}
+			
+			
+			if(formVals["fname"].value.length < 1 || formVals["fname"].value.length > 64){
+				document.getElementById("fnameErr").classList.remove("hidden");
+				success = false;
+			}else{
+				document.getElementById("fnameErr").classList.add("hidden");
+			}
+			
+			if(formVals["lname"].length < 1 || formVals["lname"].length > 64){
+				document.getElementById("lnameErr").classList.remove("hidden");
+				success = false;
+			}else{
+				document.getElementById("lnameErr").classList.add("hidden");
+			}
+			
+			if(formVals["addr"].value.length < 1){
+				document.getElementById("addrErr").classList.remove("hidden");
+				success = false;
+			}else{
+				document.getElementById("addrErr").classList.add("hidden");
+			}
+			
+			
+			
+			return success;
+		}
+		
+
 	.col-xs-3
 	.col-xs-6
-		form(action="/signupSubmit", method="post")
+		form(action="/signupSubmit", method="post", name = "signUpForm", onsubmit="return validateForm()")
+			#emailReg.alert.alert-danger.hidden
+				|Your Email is invalid
+			#emailLen.alert.alert-danger.hidden
+				|Your Email is too long
 			.form-group
 				label(for='email') Email address
 				input#email.form-control(type='email', placeholder='Email' name="email")
+				
+			#passErr.alert.alert-danger.hidden
+				|Your pasword is invalid, Your password must be at least 4 characters long
 			.form-group
 				label(for='pass') Password
 				input#pass.form-control(type='Password', placeholder='password' name="pass")
+				
+			#fnameErr.alert.alert-danger.hidden
+				|Please enter a name no longer than 64 characters
 			.form-group
 				label(for='fname') First Name
 				input#fname.form-control(type='text', placeholder='John' name="fname")
+				
+			#lnameErr.alert.alert-danger.hidden
+				|Please enter a name no longer than 64 characters
 			.form-group
 				label(for='lname') Last Name
 				input#lname.form-control(type='text', placeholder='Snow' name="lname")
 			.form-group
 				label(for='phone') Phone Number
 				input#phone.form-control(type='number', placeholder='020 000 0000' name="phone" maxlength="10")
+				
+			#addrErr.alert.alert-danger.hidden
+				|Please enter an Address
 			.form-group
 				label(for='addr') Address
 				input#addr.form-control(type='text', placeholder='Castle Black, The Wall, Westeros' name="addr")

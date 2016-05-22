@@ -58,11 +58,11 @@ router.post('/signupSubmit', function(req, res, next) {
 
 });
 
-router.post('/signIN', function(req, res, next) {
+router.post('/signInSubmit', function(req, res, next) {
   email = req.body.email;
-  pass = req.body.password;
+  pass = req.body.pass;
 
-  sql = escape("SELECT * FROM users WHERE email='" + email + "' AND pass='" + pass + "';");
+  sql = escape("SELECT * FROM users WHERE email='" + email + "';");
 
   pg.connect(DATABASE_URL, function(err, client, done) {
     if (err)
@@ -70,15 +70,30 @@ router.post('/signIN', function(req, res, next) {
     else{
       client.query(sql, function(err, result) {
         done();
+        console.log(JSON.stringify(result) + '\n\n\n\n\n\n')
+
         if (err)
          { console.error(err); res.send("Error " + err); }
+        else if (result == 'undefined' || result.rows.length === 0) {
+          // console.log('invalid email\n\n\n\n\n\n')
+          res.render('signin', { title: 'Sign In', err: 'Invlaid Email'})
+        }else if (result.rows[0].pass === 'undefined' || result.rows[0].pass !== pass) {
+          // console.log('invalid pass\nThey gave: ' + pass + '\nBut was: ' + result.rows[0].pass + '\n\n\n\n')
+          res.render('signin', { title: 'Sign In', err: 'Invlaid Password'})
+        }
         else{
-          res.render('index', { title: 'Trader', id: result.id});
+          // console.log('success\n\n\n\n\n\n')
+          res.render('signin', { title: 'Sign In', result: result.rows[0]});
           res.send
         }
       });
     }
   });
+});
+
+router.get('/signin', function(req, res, next) {
+  res.render('signin', { title: 'Sign In' });
+  res.send
 });
 
 router.get('/sell', function(req, res, next) {

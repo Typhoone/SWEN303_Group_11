@@ -49,14 +49,14 @@
     <div class="btn-group btn-group-vertical" id="buttons">
       <button id="sign-in-button" class="btn btn-xs">Sign In</button>
       <button id="sign-up-button" class="btn btn-xs">Sign Up</button>
-      <button id="username-button" class="btn btn-xs invisible"></button>
-      <button id="sign-out-button" class="btn btn-xs invisible"></button>
-      <button></button>
+      <button id="sign-out-button" class="btn btn-xs invisible">Sign Out</button>
     </div>
     <!--     <paper-button raised noink id="sign-in-button">Sign In</paper-button> -->
   </paper-toolbar>
   <paper-material id="main">
-    <iron-collapse id="collapse"></iron-collapse>
+    <h2 id="welcome" class="invisible"></h2>
+    <hr>
+    <iron-collapse id="collapse"></iron-collapse>    
   </paper-material>
 </paper-material id="content">
 <div id="searchResultsContainer" class="invisible">
@@ -74,7 +74,6 @@
 <!-- Run the JS -->
 <script type="text/javascript">
   window.onload = function () {
-    console.log('"' + document.cookie + '"');
     var noSearch = true; 
     var searchField = document.getElementById("search");
     var searchedFor = document.getElementById('searchedFor');
@@ -91,7 +90,7 @@
     var signInBtn = document.getElementById('sign-in-button');
     var signUpBtn = document.getElementById('sign-up-button');
     var signOutBtn = document.getElementById('sign-out-button');
-    var usernameBtn = document.getElementById('username-button');
+    var welcomeText = document.getElementById('welcome');
 
     var menu = document.getElementById('menu');
 
@@ -117,8 +116,14 @@
       //TODO display the results which will be in a JSON format of our choosing.
     }
 
+    signOut = function(){
+      document.cookie = "username=";
+      document.cookie = "ID=";
+      location.reload();
+    }
+
     signIn = function(){
-      //TODO sign-in logic
+      window.location = "/signin";
     }
 
     signUp = function(){
@@ -145,14 +150,14 @@
       if (username != "") {
         signInBtn.className = "invisible";
         signUpBtn.className = "invisible";
-        usernameBtn = "btn btn-xs";
-        usernameBtn.innerHTML = username;
-        signOutBtn = "btn btn-xs";
+        signOutBtn.className = "btn btn-xs";
+        welcomeText.innerHTML = "Welcome back " + username + "!";
+        welcomeText.className = "";
       }else{
         signInBtn.className = "btn btn-xs";
         signUpBtn.className = "btn btn-xs";
-        usernameBtn = "invisible";
         signOutBtn = "invisible";
+        welcomeText.className = "invisible";
       }
     }
 
@@ -177,7 +182,6 @@
     }
 
     search = function(){
-      console.log(collapseToggled);
       var currentSearch = searchField.value;
       ensureCollapsed();
       if(currentSearch == ''){
@@ -204,6 +208,7 @@
     searchBtn.addEventListener("click", search);
     signUpBtn.addEventListener("click", signUp);
     signInBtn.addEventListener("click", signIn);
+    signOutBtn.addEventListener("click", signOut);
     menu.addEventListener("iron-select", menuUsed);
     checkSignedIn();
   }

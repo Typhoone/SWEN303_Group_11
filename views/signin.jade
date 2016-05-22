@@ -16,7 +16,7 @@ block content
 		//- checks for the email and ID vars and if they exist sets them to email and ID, this is only done once log in is successfull
 		-if (typeof(email) !== 'undefined' && typeof(ID) !== 'undefined') {
 			script var email = !{JSON.stringify(email)}
-			script var ID = !{JSON.stringify(ID)}
+			script var ID = !{JSON.stringify(ID)}									
 		-}
 		
 	
@@ -26,7 +26,7 @@ block content
 				input#email.form-control(type='email', placeholder='Email' name="email")
 			.form-group
 				label(for='pass') Password
-				input#pass.form-control(type='Password', placeholder='password' name="pass")
+				input#pass.form-control(type='Password', placeholder='Password' name="pass")
 			button.btn.btn-default(type="submit", name="submitBtn") Submit
 		.col-xs-3
 				

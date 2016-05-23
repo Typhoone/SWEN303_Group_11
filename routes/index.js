@@ -10,19 +10,25 @@ DATABASE_URL = "postgres://qczjndeqrgzuke:hwrYaoDiY6dy81EZElhbrrwNGm@ec2-54-227-
 
 pg.defaults.ssl = true;
 router.get('/db', function (request, response) {
-  pg.connect(DATABASE_URL, function(err, client, done) {
-    if (err)
-     { console.error(err); response.send("Error " + err); }
-    else{
-      client.query('SELECT * FROM test_table', function(err, result) {
-        done();
-        if (err)
-         { console.error(err); response.send("Error " + err); }
-        else
-         { response.render('db', {results: result.rows} ); }
-      });
-    }
-  });
+  // pg.connect(DATABASE_URL, function(err, client, done) {
+  //   if (err)
+  //    { console.error(err); response.send("Error " + err); }
+  //   else{
+  //     client.query('SELECT * FROM test_table', function(err, result) {
+  //       done();
+  //       if (err)
+  //        { console.error(err); response.send("Error " + err); }
+  //       else
+  //        { response.render('db', {results: result.rows} ); }
+  //     });
+  //   }
+  // });
+  response.render('db', {results: "result.rows"} );
+});
+
+router.get('/db2', function (request, response) {
+  body = request.param("val")
+  response.render('db2', {val: body} );
 });
 
 router.get('/item', function(request, response){

@@ -1,4 +1,8 @@
 extends layout
+include toolbar.html
 
 block content
-  p !{JSON.stringify(results)}
+  p !{results}
+  -val = "anotherVal"
+  a(href='/db2?val=' + val) recurse
+  

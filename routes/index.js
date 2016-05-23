@@ -34,7 +34,7 @@ router.get('/item', function(req, res, next) {
     var imagename = req.param("imagename");
     var description = req.param("description");
     var stock = req.param("stock");
-    res.render('item', { title: 'item', name: name, image: imagename, description: description, stock: JSON.stringify(stock)});
+    res.render('item', { title: 'item', name: name, image: imagename, description: description, stock: stock});
     res.send
 });
 

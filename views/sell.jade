@@ -4,9 +4,38 @@ block content
 	include toolbar.html
 	link(href="/stylesheets/sell.css", rel="stylesheet")
 
+	script(type="text/javascript").
+		function validateForm() {
+			success = true;
+			formVals = document.forms["form"];
+
+			if (formVals["name"].value.length < 1) {
+				document.getElementById("nameErr").classList.remove("hidden");
+				success = false;
+			} else {
+				document.getElementById("nameErr").classList.add("hidden");
+			}
+
+			if (formVals["description"].value.length < 1) {
+				document.getElementById("descriptionErr").classList.remove("hidden");
+				success = false;
+			} else {
+				document.getElementById("descriptionErr").classList.add("hidden");
+			}
+
+			if (formVals["image"].value.length < 1) {
+				document.getElementById("imageErr").classList.remove("hidden");
+				success = false;
+			} else {
+				document.getElementById("imageErr").classList.add("hidden");
+			}
+
+			return success;
+		}
+
 	.col-xs-3
 	.col-xs-6
-		form(action="/productSubmit", method="post", ID="form", enctype="multipart/form-data")
+		form(action="/productSubmit", method="post", ID="form", enctype="multipart/form-data", onsubmit="return validateForm()")
 			.form-group
 				script.
 					getCookie = function(cname) {
@@ -37,12 +66,19 @@ block content
 					hiddenInput.value = userID;
 
 					form.appendChild(hiddenInput);
+
 			.form-group
 				label(for='name') Product Name
 				input#name.form-control(type='text', placeholder='Name', name="name")
+			#nameErr.alert.alert-danger.hidden
+				|Please enter a name for your product
+
 			.form-group
 				label(for='description') Product Description
 				textarea#description.form-control(rows='10', placeholder='Description', name="description")
+			#descriptionErr.alert.alert-danger.hidden
+				|Please enter a description for your product
+
 			.form-group
 				label(for='price') Product Price
 				input#price.form-control(type='number', min='1', value='10', name="price")
@@ -57,5 +93,8 @@ block content
 			.form-group
 				label(for='image') Product Image
 				input#image.form-control(type='file', accept='image/*', name="image")
+			#imageErr.alert.alert-danger.hidden
+				|Please upload an image of your product
+				
 			button.btn.btn-default(type="submit", name="submitBtn") Submit Product
 		.col-xs-3

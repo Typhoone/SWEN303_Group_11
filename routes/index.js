@@ -4,6 +4,8 @@ var router = express.Router();
 var pg = require('pg');
 var escape = require('pg-escape')
 
+var categories = ["Art", "Beauty", "Books", "Clothing", "Computer", "Electronics", "Footwear", "Furniture", "Gardening", "Health", "Outdoors", "Stationary", "Toys", "Sport", "Other"];
+
 DATABASE_URL = "postgres://qczjndeqrgzuke:hwrYaoDiY6dy81EZElhbrrwNGm@ec2-54-227-240-164.compute-1.amazonaws.com:5432/da1pqqn7h9sfln";
 
 pg.defaults.ssl = true;
@@ -96,25 +98,21 @@ router.get('/signin', function(req, res, next) {
   res.send
 });
 
-router.get('/sell', function(req, res, next) {
-  res.render('sell', { title: 'Sell' });
-  res.send
-});
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Trader' });
 });
 
-router.get('/Browse', function(req, res, next) {
+router.get('/browse', function(req, res, next) {
   res.render('browse', {title: 'Trader'});
 });
 
-router.get('/Sell', function(req, res, next) {
-  res.render('sell', {title: 'Trader'});
+router.get('/sell', function(req, res, next) {
+  console.log(categories + "\n\n\n\n\n\n");
+  res.render('sell', {title: 'Trader', categories: JSON.stringify(categories)});
 });
 
-router.get('/Help', function(req, res, next) {
+router.get('/help', function(req, res, next) {
   res.render('help', {title: 'Trader'});
 });
 

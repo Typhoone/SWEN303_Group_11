@@ -26,9 +26,8 @@ block content
 			.form-group
 				label(for='category') Product Category
 				select#category.form-control(name='Category')
-					option(value='one') One
-					option(value='two') Two
-					option(value='three') Three
+					each val in categories
+						option(value=val) #{val}
 			.form-group
 				label(for='image') Product Image
 				input#image.form-control(type='file', name='Image', accept='image/*')

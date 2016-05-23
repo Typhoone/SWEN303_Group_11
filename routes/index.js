@@ -113,7 +113,7 @@ router.post('/signInSubmit', function(req, res, next) {
         }
         else{
           // console.log('success\n\n\n\n\n\n')
-          res.render('index', { title: 'Home', email: result.rows[0].email, ID: result.rows[0].id});
+          res.render('index', { title: 'Home', email: result.rows[0].email, ID: result.rows[0].id, fname: result.rows[0].first_name});
           res.send
         }
       });
@@ -129,7 +129,7 @@ router.get('/signin', function(req, res, next) {
 router.get('/search', function(req, res, next) {
   var term = req.param("term");
 
-  sql = escape("SELECT * FROM items WHERE itemname LIKE '%" + term + "%';");
+  sql = escape("SELECT * FROM items WHERE LOWER(itemname) LIKE LOWER('%" + term + "%');");
 
   pg.connect(DATABASE_URL, function(err, client, done) {
     if (err)
@@ -247,5 +247,47 @@ router.post('/productSubmit', function(req, res, next) {
 router.get('/help', function(req, res, next) {
   res.render('help', {title: 'Help!'});
 });
+
+router.post('/purchase', function(req, res, next){
+
+  ID = escape(req.params("ID"));
+
+  sql = "UPDATE items SET stock = stock - 1 WHERE id = '" + ID + "';";
+
+  pg.connect(DATABASE_URL, function(err, client, done) {
+    if (err){
+      console.error(err); res.send("Error " + err);
+    }else{
+      client.query(sql, function(err, result) {
+        done();
+        //update table
+        if (err)
+         { console.error(err); res.send("Error " + err); }
+      });//end first query
+
+      //check if empty
+      sql = "SELECT * FROM items WHERE id = '" + ID + "';";
+
+      client.query(sql, function(err, result) {
+        done();
+        if (err){
+          console.error(err); res.send("Error " + err);
+        }else{
+          if(result.rows[0].stock < 1){
+            sql = "DELETE FROM items WHERE id = '" + ID + "';";
+            client.query(sql, function(err, result){
+              if (err)
+               { console.error(err); res.send("Error " + err); }
+            });
+          }
+        }
+      });
+  };// end first connect
+  res.render('browse', {title: 'Browse', success : true});
+  res.send
+});//end post
+
+
+})
 
 module.exports = router;

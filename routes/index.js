@@ -29,12 +29,14 @@ router.get('/db', function (request, response) {
 });
 
 router.get('/item', function(req, res, next) {
-
+    var id = req.param('id');
+    var uid = req.param("uid");
     var name = req.param("name");
     var imagename = req.param("imagename");
     var description = req.param("description");
     var stock = req.param("stock");
-    res.render('item', { title: 'item', name: name, image: imagename, description: description, stock: stock});
+    var price = req.param("price");
+    res.render('item', { title: 'item', name: name, image: imagename, description: description, stock: stock, cost: price, id: id, uid: uid});
     res.send
 });
 
@@ -275,10 +277,10 @@ router.get('/help', function(req, res, next) {
 });
 
 router.post('/purchase', function(req, res, next){
+    var quantity = req.body.quantity;
+    ID = escape(req.param("id"));
 
-  ID = escape(req.params("ID"));
-
-  sql = "UPDATE items SET stock = stock - 1 WHERE id = '" + ID + "';";
+  sql = "UPDATE items SET stock = stock - " + quantity + " WHERE id = '" + ID + "';";
 
   pg.connect(DATABASE_URL, function(err, client, done) {
     if (err){
@@ -308,9 +310,22 @@ router.post('/purchase', function(req, res, next){
           }
         }
       });
+        sql = "SELECT * FROM items";
+        client.query(sql, function(err, result){
+            done();
+            if(err){
+                console.error(err);
+                res.send("Error " + err);
+            }
+            else{
+                res.render('browse', {result: result.rows});
+                res.send
+            }
+        });
+
   };// end first connect
-  res.render('browse', {title: 'Browse', success : true});
-  res.send
+  /*res.render('index', {title: 'Home', success : true});
+  res.send*/
 });//end post
 
 

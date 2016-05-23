@@ -8,7 +8,7 @@ block content
 		ul.list-inline
 			each val in result
 				li
-					a(href="/item?name="+val.itemname+"&imagename="+val.imagename+"&description="+val.description+"&stock="+val.stock+"&id="+val.id id=val.id)
+					a(href="/item?name="+val.itemname+"&imagename="+val.imagename+"&description="+val.description+"&stock="+val.stock+"&id="+val.id + "&price=" + val.price+"&uid="+val.userid id=val.id)
 						- var image = val.imagename;
 						- var name = val.itemname;
 						- var description = val.description;

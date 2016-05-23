@@ -22,17 +22,44 @@ block content
                 .col-md-3.right
 
                     hr
-                    h3 Price: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 9.99
+                    h3 Price: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $#{cost}
                     br
-                    h3 Available: &nbsp; &nbsp; &nbsp; &nbsp;  3
+                    h3 Available: &nbsp; &nbsp; &nbsp; &nbsp;  #{stock}
 
                     ul.list-inline
                         li
                             p Quantity
                         li
-                            form(action="/purchase", method="post")
+                            form(action="/purchase"+"?id=" + id, method="post")
                                 .form-group
-                                    button.btn.btn-primary(type='submit') Buy it now
+                                    button.btn.btn-primary(type='submit' id='main-button') Buy it now
+                                    script.
+                                        getCookie = function (cname) {
+                                            var name = cname + "=";
+                                            var ca = document.cookie.split(';');
+                                            for (var i = 0; i < ca.length; i++) {
+                                                var c = ca[i];
+                                                while (c.charAt(0) == ' ') {
+                                                    c = c.substring(1);
+                                                }
+                                                if (c.indexOf(name) == 0) {
+                                                    return c.substring(name.length, c.length);
+                                                }
+                                            }
+                                            return "";
+                                        }
+                                        var signedInID = getCookie("ID");
+                                        var itemUid = #{uid};
+                                        if(signedInID == ""){
+                                            var btn = document.getElementById('main-button');
+                                            btn.className = "invisible";
+                                        }
+                                        else if(itemUid == signedInID){
+                                            var btn = document.getElementById('main-button');
+                                            btn.innerHTML = "Remove";
+                                            btn.className = "btn btn-danger";
+                                        }
+                                        console.log(#{uid});
                                     select.form-control(name="quantity")
                                         -var number = stock;
                                         -var count = 1;

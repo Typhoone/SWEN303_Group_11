@@ -216,6 +216,7 @@ router.get('/help', function(req, res, next) {
 });
 
 router.post('/purchase', function(req, res, next){
+
   ID = escape(req.params("ID"));
 
   sql = "UPDATE items SET stock = stock - 1 WHERE id = '" + ID + "';";
@@ -252,7 +253,6 @@ router.post('/purchase', function(req, res, next){
   res.render('browse', {title: 'Browse', success : true});
   res.send
 });//end post
-
 
 
 })

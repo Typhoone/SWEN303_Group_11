@@ -13,7 +13,7 @@ block content
 
 	.col-xs-3
 	.col-xs-6
-		form(action="/db", method="get")
+		form(action="/productSubmit", method="post")
 			.form-group
 				label(for='name') Product Name
 				input#name.form-control(type='text', placeholder='Name')
@@ -23,6 +23,9 @@ block content
 			.form-group
 				label(for='price') Product Price
 				input#price.form-control(type='number', min='1', value='10')
+			.form-group
+				label(for='quantity') Product Quantity
+				input#quantity.form-control(type='number', min='1', value='1')
 			.form-group
 				label(for='category') Product Category
 				select#category.form-control(name='Category')

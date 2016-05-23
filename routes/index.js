@@ -130,6 +130,26 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Trader' });
 });
 
+router.get('/browse', function(req, res, next) {
+      pg.connect(DATABASE_URL, function(err, client, done){
+        if(err){
+            console.error(err);
+            res.send("Error " + err);
+        }
+        else{
+            client.query('SELECT * FROM items', function(err, result){
+                done();
+                if(err){
+                    console.error(err);
+                    res.send("Error " + err);
+                }
+                else{
+                    res.render('browse', {result: result.rows});
+                }
+            });
+        }
+    });
+});
 
 router.get('/sell', function(req, res, next) {
   res.render('sell', {title: 'Trader', categories: JSON.stringify(categories)});

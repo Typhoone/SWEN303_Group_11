@@ -2,3 +2,16 @@ extends layout
 
 block content
 	include toolbar.html
+	link(href="/stylesheets/browse.css", rel="stylesheet")
+
+
+	.col-xs-12
+		ul.list-inline
+			each val in result
+				li
+					a(href="#")
+						- var image = val.imagename;
+						- var name = val.itemname;
+						img(src='images/' + image + '.jpg', alt="failed", class="img-thumbnail")
+						h4 #{name}
+		.col-xs-3

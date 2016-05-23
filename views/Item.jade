@@ -12,8 +12,7 @@ block content
     body
         .container
             .row.top
-                .col-md-3
-                .col-md-6
+                .col-md-9
                     h1 #{name}
                 .col-md-3
             .row.middle
@@ -26,23 +25,26 @@ block content
                     h3 Price: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 9.99
                     br
                     h3 Available: &nbsp; &nbsp; &nbsp; &nbsp;  3
+
                     ul.list-inline
                         li
                             p Quantity
                         li
                             form(action="/purchase", method="post")
                                 .form-group
+                                    button.btn.btn-primary(type='submit') Buy it now
                                     select.form-control(name="quantity")
-                                        -var number = !{stock};
+                                        -var number = stock;
                                         -var count = 1;
-                                            while number != 0
-                                                option(value = count) #{count}
-                                                number = number + 1;
-                                                count = count + 1;
-                                button.btn.btn-primary(type='submit') Buy it now
+                                        while number != 0
+                                            option(value = count) #{count}
+                                            -number = number - 1;
+                                            -count = count + 1;
 
-                    button.btn.btn-default(type='button') Add to Cart
-                    button.btn.btn-success(type='button') Add to Watchlist
+                                            -console.log("This is Count: " + count);
+                                            -console.log("This is number: " + number);
+
+
                     hr
             .row.bottom
                 .col-md-9

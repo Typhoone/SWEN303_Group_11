@@ -2,6 +2,7 @@ extends layout
 
 block content
 	include toolbar.html
+	link(href="/stylesheets/form.css", rel="stylesheet")
 
 	script(type="text/javascript").
 		function validateForm(){
@@ -62,40 +63,40 @@ block content
 	.col-xs-3
 	.col-xs-6
 		form(action="/signupSubmit", method="post", name = "signUpForm", onsubmit="return validateForm()")
+			.form-group
+				label(for='email') Email address
+				input#email.form-control(type='email', placeholder='Email' name="email")
 			#emailReg.alert.alert-danger.hidden
 				|Your Email is invalid
 			#emailLen.alert.alert-danger.hidden
 				|Your Email is too long
-			.form-group
-				label(for='email') Email address
-				input#email.form-control(type='email', placeholder='Email' name="email")
-				
-			#passErr.alert.alert-danger.hidden
-				|Your pasword is invalid, Your password must be at least 4 characters long
+			
 			.form-group
 				label(for='pass') Password
 				input#pass.form-control(type='Password', placeholder='password' name="pass")
-				
-			#fnameErr.alert.alert-danger.hidden
-				|Please enter a name no longer than 64 characters
+			#passErr.alert.alert-danger.hidden
+				|Your pasword is invalid, Your password must be at least 4 characters long
+			
 			.form-group
 				label(for='fname') First Name
 				input#fname.form-control(type='text', placeholder='John' name="fname")
-				
-			#lnameErr.alert.alert-danger.hidden
+			#fnameErr.alert.alert-danger.hidden
 				|Please enter a name no longer than 64 characters
+			
 			.form-group
 				label(for='lname') Last Name
 				input#lname.form-control(type='text', placeholder='Snow' name="lname")
+			#lnameErr.alert.alert-danger.hidden
+				|Please enter a name no longer than 64 characters
+
 			.form-group
 				label(for='phone') Phone Number
 				input#phone.form-control(type='number', placeholder='020 000 0000' name="phone" maxlength="10")
-				
-			#addrErr.alert.alert-danger.hidden
-				|Please enter an Address
 			.form-group
 				label(for='addr') Address
 				input#addr.form-control(type='text', placeholder='Castle Black, The Wall, Westeros' name="addr")
+			#addrErr.alert.alert-danger.hidden
+				|Please enter an Address
 			button.btn.btn-default(type="submit", name="submitBtn") Submit
 		.col-xs-3
 				

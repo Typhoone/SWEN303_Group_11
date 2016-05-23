@@ -3,11 +3,11 @@
 	color: #000000;
 }
 hr{
-	border: none;
-	height: 3px;
+	border: none !important;
+	height: 3px !important;
 	/* Set the hr color */
-	color: #333; /* old IE */
-	background-color: #333; /* Modern Browsers */
+	color: #333 !important; /* old IE */
+	background-color: #333 !important; /* Modern Browsers */
 }
 h1{
 	font-size: 64px;
@@ -37,13 +37,10 @@ h2{
 		color: #000000;
 	}
 
-	.spacer{
-		flex: 1;
-	}
-
 	#main{
 		margin-right: -8px;
 		margin-left: -8px;
+		margin-bottom: 16px;
 		min-height: 50px;
 		min-width: 50px;
 		border: 3px solid #333;
@@ -54,7 +51,7 @@ h2{
 		background: #B2D234;
 		margin-right: -8px;
 		margin-left: -8px;
-		margin-top: -8px;
+		margin-top: 0px;
 	}
 
 	#logo{
@@ -71,22 +68,14 @@ h2{
 		max-width: 60%;
 	}
 
-	#sign-in-button{
-		max-width: 50%; 
-		max-height: 50%; 
-		font-size: xx-small;
-		float: right;
-		margin-left: 16px;
-		background-color: #A7A9AC;
+	#buttons{
+		max-height: 60%;
+		margin-left: 8px;
 	}
 
 	#collapse{
 		margin-top: 4px;
 		font-weight: 200;
-	}
-
-	#animationContainer{
-		margin: 0 auto;
 	}
 
 	#content{
@@ -97,7 +86,7 @@ h2{
 	#title{
 		display: inline-block;
 		margin-left: 16px;
-		flex: 1;
+		flex: 2;
 	}
 	.rate-content{ /* Background image on paper-card, fade it to become a tad darker. */
 		background-image: linear-gradient(

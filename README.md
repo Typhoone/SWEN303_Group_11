@@ -2,12 +2,12 @@
 
 ### Things to do in order to consider our project a MVP
 
-- [ ] Implement Browse page.
-- [ ] Define set categories for items. (Possible can be used to refine search.)
-- [ ] Set up a simple help page with how our site works.
+- [x] Implement Browse page.
+- [x] Define set categories for items. (Possible can be used to refine search.)
+- [x] Set up a simple help page with how our site works.
 - [ ] Set up a cart to view current items selected. (Would work best with a button to show a popup dialog from the toolbar)
 - [ ] A checkout page? Some way to confirm that the buyer is now obligated to purchase items. (Give them seller email)
-- [ ] Search leads to the browse page and displays results.
+- [x] Search leads to the browse page and displays results.
 
 #### Extra things to do if we have time.
 

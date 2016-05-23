@@ -24,6 +24,7 @@ block content
 		}else{
 			var e = (!{JSON.stringify(email)});
 			var id = (!{JSON.stringify(ID)});
+			//console.log(email);
 			//If email hasn't been passed a syntax error is thrown. This is ironically good for us as it won't run the 	code below.
 			document.cookie = "username=" + e;
 			document.cookie = "ID=" + id;

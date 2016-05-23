@@ -79,7 +79,6 @@
     var searchedFor = document.getElementById('searchedFor');
     var searchResultsContainer = document.getElementById('searchResultsContainer');
     var noSearch = document.getElementById('emptySearchMessage');
-    var previousSearch = '';
 
     var collapseToggled = false;
     var collapse = document.getElementById('collapse');
@@ -109,11 +108,7 @@
    }
 
    query = function(text){
-      //TODO search the database.
-    }
-
-    displayResults = function(){
-      //TODO display the results which will be in a JSON format of our choosing.
+      window.location = "/search?term=" + text;
     }
 
     signOut = function(){
@@ -167,13 +162,13 @@
         window.location = "/";
         break;
         case "Browse":
-        window.location = "/Browse";
+        window.location = "/browse";
         break;
         case "Sell":
-        window.location = "/Sell";
+        window.location = "/sell";
         break;
         case "Help":
-        window.location = "/Help";
+        window.location = "/help";
         break;
         default:
         console.log("Should never get here. (menu)");
@@ -189,26 +184,27 @@
           collapse.innerHTML = noSearch.innerHTML;
           ensureOpened();
         }, animationDelay);
-      }else if(currentSearch == previousSearch){
-        setTimeout(function(){
-          ensureOpened();
-        }, animationDelay);
       }else{
-        var results = query(currentSearch);
-        searchedFor.innerHTML = currentSearch;        
+        query(currentSearch);
+/*        searchedFor.innerHTML = currentSearch;        
         setTimeout(function(){ 
           displayResults(results);
           collapse.innerHTML = searchResultsContainer.innerHTML;
           ensureOpened();
-        }, animationDelay);
+        }, animationDelay);*/
       }
-      previousSearch = currentSearch;
     }
 
     searchBtn.addEventListener("click", search);
     signUpBtn.addEventListener("click", signUp);
     signInBtn.addEventListener("click", signIn);
     signOutBtn.addEventListener("click", signOut);
+    searchField.addEventListener('keypress', function (e){
+      var key = e.which || e.keyCode;
+    if (key === 13) { // 13 is enter
+      search();
+    }
+    });
     menu.addEventListener("iron-select", menuUsed);
     checkSignedIn();
   }

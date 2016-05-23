@@ -8,8 +8,11 @@
   "dependencies": {
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",
+    "crypto": "0.0.3",
     "debug": "~2.2.0",
     "express": "~4.13.1",
+    "formidable": "^1.0.17",
+    "fs-extra": "^0.30.0",
     "jQuery": "^1.7.4",
     "jade": "~1.11.0",
     "jsdom": "^9.1.0",

@@ -6,7 +6,7 @@ block content
 
 	.col-xs-3
 	.col-xs-6
-		form(action="/productSubmit", method="post", ID="form")
+		form(action="/productSubmit", method="post", ID="form", enctype="multipart/form-data")
 			.form-group
 				script.
 					getCookie = function(cname) {

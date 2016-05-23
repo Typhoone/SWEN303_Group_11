@@ -3,6 +3,9 @@ var router = express.Router();
 
 var pg = require('pg');
 var escape = require('pg-escape')
+var formidable = require('formidable')
+var fs = require('fs-extra')
+var crypto = require('crypto'), key = 'thekey'
 
 var categories = ["Art", "Beauty", "Books", "Clothing", "Computer", "Electronics", "Footwear", "Furniture", "Gardening", "Health", "Outdoors", "Stationary", "Toys", "Sport", "Other"];
 
@@ -182,33 +185,63 @@ router.get('/sell', function(req, res, next) {
 
 //run sell query
 router.post('/productSubmit', function(req, res, next) {
-  userid = req.body.userid;
-  name = req.body.name;
-  description = req.body.description;
-  price = req.body.price;
-  quantity = req.body.quantity;
-  category = req.body.category;
-  image = req.body.image;
+  var userid, productName, description, price, quantity, category;
+  image = crypto.createHmac('sha1', key).update((new Date()).valueOf().toString()).digest('hex').substring(5, 15);
 
-  sql = escape("INSERT INTO items (id, userid, itemname, price, imagename, uploaddate, enddate, stock, description, category) VALUES (default,'" + userid + "','" + name  + "','" + price + "','" + image + "'," + "LOCALTIMESTAMP" + "," + "LOCALTIMESTAMP" + ",'" + quantity + "','" + description + "','" + category + "');");
-  console.log(sql);
-  pg.connect(DATABASE_URL, function(err, client, done) {
-    if (err)
-     { console.error(err); res.send("Error " + err); }
-    else{
-      client.query(sql, function(err, result) {
-        done();
-        if (err)
-         { console.error(err); res.send("Error " + err); }
-        else{
-          res.render('sell', {title: 'Trader', categories: JSON.stringify(categories)});
-          res.send
-        }
-      });
-    }
-  });
-
-
+  new formidable.IncomingForm().parse(req)
+    .on('file', function(name, file) {
+    	fs.copy(file.path, 'public/images/' + image + ".jpg", function(err) {  
+      		if (err) {
+        		console.error(err);
+        	} else {
+        		console.log("Copied successfully");
+        	}
+    	});
+    })
+    .on('field', function(name, field) {
+    	switch(name) {
+	    	case "userid":
+	     		userid = field
+	        	break;
+	    	case "name":
+	     		productName = field
+	        	break;
+	        case "description":
+	     		description = field
+	        	break;
+	        case "price":
+	     		price = field
+	        	break;
+	        case "quantity":
+	     		quantity = field
+	        	break;
+	        case "category":
+	     		category = field
+	        	break;
+	    	default:
+	        	break;
+		}
+    })
+    .on('error', function(err) {
+        next(err);
+    })
+    .on('end', function() {
+        sql = escape("INSERT INTO items (id, userid, itemname, price, imagename, uploaddate, stock, description, category) VALUES (default,'" + userid + "','" + productName  + "','" + price + "','" + image + "'," + "LOCALTIMESTAMP" + ",'" + quantity + "','" + description + "','" + category + "');");
+		console.log(sql);
+		pg.connect(DATABASE_URL, function(err, client, done) {
+			if (err) { console.error(err); res.send("Error " + err); }
+			else {
+				client.query(sql, function(err, result) {
+					done();
+					if (err) { console.error(err); res.send("Error " + err); }
+					else {
+						res.render('sell', {title: 'Trader', categories: categories});
+						res.send
+					}
+				});
+			}
+		});
+    });
 });
 
 router.get('/help', function(req, res, next) {

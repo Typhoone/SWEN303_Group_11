@@ -26,6 +26,7 @@ router.get('/db', function (request, response) {
 });
 
 router.get('/item', function(request, response){
+  
     pg.connect(DATABASE_URL, function(err, client, done){
         if(err){
             console.error(err);
@@ -42,6 +43,7 @@ router.get('/item', function(request, response){
                     var name = "Super awesome random object";
                     var itemImage = "items";
                     var description = "This is just a lot of informatoin about the object in general, at the moment all of this information is just a placeholder until i can write the rest of it.";
+                    var stock = 
                     response.render('Item', {result:result.rows, name: name, image: itemImage, description: description });
                 }
             });

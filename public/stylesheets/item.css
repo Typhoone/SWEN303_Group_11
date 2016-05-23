@@ -1,6 +1,5 @@
 
 p {
-    color: blue;
     display: block;
     margin-left: auto;
     margin-right: auto
@@ -15,14 +14,13 @@ p {
      height:500px;
      display: block;
      margin-left: auto;
-     margin-right: auto
+     margin-right: auto;
+     margin-bottom: 8px;
 
  }
 
  .left {
      height:500px;
-
-
  }
 
  .right {
@@ -49,12 +47,6 @@ p {
      display:inline-block;
 
  }
-
- h1,  h3 {
-     color: #00acc1;
-
- }
-
 
  .btn {
 

@@ -110,7 +110,7 @@ router.post('/signInSubmit', function(req, res, next) {
         }
         else{
           // console.log('success\n\n\n\n\n\n')
-          res.render('index', { title: 'Home', email: result.rows[0].email, ID: result.rows[0].id});
+          res.render('index', { title: 'Home', email: result.rows[0].email, ID: result.rows[0].id, fname: result.rows[0].first_name});
           res.send
         }
       });
@@ -126,7 +126,7 @@ router.get('/signin', function(req, res, next) {
 router.get('/search', function(req, res, next) {
   var term = req.param("term");
 
-  sql = escape("SELECT * FROM items WHERE itemname LIKE '%" + term + "%';");
+  sql = escape("SELECT * FROM items WHERE LOWER(itemname) LIKE LOWER('%" + term + "%');");
 
   pg.connect(DATABASE_URL, function(err, client, done) {
     if (err)

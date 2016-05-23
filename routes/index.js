@@ -109,7 +109,7 @@ router.post('/signInSubmit', function(req, res, next) {
                     res.send("Error " + err);
                 }
                 else{
-                    res.render('index', {title: 'Trader', result: result.rows, email: e, ID: i, fname: f});
+                    res.render('index', {title: 'Trader', result: result.rows, email: e, ID: i, fname: f, categories: categories});
                     res.send
                 }
             });

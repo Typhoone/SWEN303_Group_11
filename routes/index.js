@@ -215,4 +215,45 @@ router.get('/help', function(req, res, next) {
   res.render('help', {title: 'Help!'});
 });
 
+router.post('/purchase', funciton(req, res, next){
+  ID = escape(req.params("ID"));
+
+  sql = "UPDATE items SET stock = stock - 1 WHERE id = '" + ID + "';";
+
+  pg.connect(DATABASE_URL, function(err, client, done) {
+    if (err)
+     { console.error(err); res.send("Error " + err); }
+    else{
+      client.query(sql, function(err, result) {
+        done();
+        //update table
+        if (err)
+         { console.error(err); res.send("Error " + err); }
+      });
+      //check if empty
+      sql = "SELECT * FROM items WHERE id = '" + ID + "';";
+      client.query(sql, function(err, result) {
+        done();
+        //update table
+        if (err)
+         { console.error(err); res.send("Error " + err); }
+        else{
+          if(result.rows[0].stock < 1){
+            sql = "DELETE FROM items WHERE id = '" + ID + "';";
+            client.query(sql, function(err, result){
+              if (err)
+               { console.error(err); res.send("Error " + err); }
+            })
+          }
+        }
+      });
+
+      res.render('browse', {title: 'Browse', success : true);
+      res.send
+
+    }
+  });
+
+})
+
 module.exports = router;

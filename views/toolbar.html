@@ -112,6 +112,7 @@
     signOut = function(){
       document.cookie = "username=";
       document.cookie = "ID=";
+      console.log("Signed out here are the cookies: " + document.cookie);
       window.location = "/";
     }
 

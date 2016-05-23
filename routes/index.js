@@ -25,6 +25,31 @@ router.get('/db', function (request, response) {
   });
 });
 
+router.get('/item', function(request, response){
+    pg.connect(DATABASE_URL, function(err, client, done){
+        if(err){
+            console.error(err);
+            response.send("Error " + err);
+        }
+        else{
+            client.query('Select * FROM test_table WHERE name = name', function(err, result){
+                done();
+                if(err){
+                    console.error(err);
+                    response.send("Error " + err);
+                }
+                else{
+                    var name = "Super awesome random object";
+                    var itemImage = "items";
+                    var description = "This is just a lot of informatoin about the object in general, at the moment all of this information is just a placeholder until i can write the rest of it.";
+                    response.render('Item', {result:result.rows, name: name, image: itemImage, description: description });
+                }
+            });
+        }
+    });
+  })
+
+
 //Load signup page
 router.get('/signup', function(req, res, next) {
   res.render('signup', { title: 'Register' });
@@ -98,42 +123,14 @@ router.get('/signin', function(req, res, next) {
   res.send
 });
 
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Trader' });
 });
 
-router.get('/item', function(request, response){
-    pg.connect(DATABASE_URL, function(err, client, done){
-        if(err){
-            console.error(err);
-            response.send("Error " + err);
-        }
-        else{
-            client.query('Select * FROM test_table WHERE name = name', function(err, result){
-                done();
-                if(err){
-                    console.error(err);
-                    response.send("Error " + err);
-                }
-                else{
-                    var name = "Super awesome random object";
-                    var itemImage = "items.jpg";
-                    var description = "This is just a lot of informatoin about the object in general, at the moment all of this information is just a placeholder until i can write the rest of it.";
-                    response.render('item', {result:result.rows, name: name, image: itemImage, description: description });
-                }
-            });
-        }
-    });
-})
 
-/*
-router.get('/item', function(req, res, next){
-    res.render('item')
-});
-
-*/
 
 
 module.exports = router;
-

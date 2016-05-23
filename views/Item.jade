@@ -30,13 +30,19 @@ block content
                         li
                             p Quantity
                         li
-                            select.form-control
-                                option(value='one') 1
-                                option(value='two') 2
-                                option(value='three') 3
-                                option(value='four') 4
-                                option(value='five') 5
-                    button.btn.btn-primary(type='button') Buy it now
+                            form(action="/purchase", method="post")
+                                .form-group
+                                    select.form-control(name="quantity")
+                                        -var number = #{stock};
+                                        -var count = 1;
+                                            while number != 0
+                                                option(value = count) #{count}
+                                                number = number + 1;
+                                                count = count + 1;
+                                button.btn.btn-primary(type='submit') Buy it now
+
+                    button.btn.btn-default(type='button') Add to Cart
+                    button.btn.btn-success(type='button') Add to Watchlist
                     hr
             .row.bottom
                 .col-md-9

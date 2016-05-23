@@ -110,7 +110,7 @@ router.post('/signInSubmit', function(req, res, next) {
         }
         else{
           // console.log('success\n\n\n\n\n\n')
-          res.render('index', { title: 'Sign In', email: result.rows[0].email, ID: result.rows[0].id});
+          res.render('index', { title: 'Home', email: result.rows[0].email, ID: result.rows[0].id});
           res.send
         }
       });
@@ -122,6 +122,31 @@ router.get('/signin', function(req, res, next) {
   res.render('signin', { title: 'Sign In' });
   res.send
 });
+
+router.get('/search', function(req, res, next) {
+  var term = req.param("term");
+
+  sql = escape("SELECT * FROM items WHERE itemname LIKE '%" + term + "%';");
+
+  pg.connect(DATABASE_URL, function(err, client, done) {
+    if (err)
+     { console.error(err); res.send("Error " + err); }
+    else{
+      client.query(sql, function(err, result) {
+        done();
+        console.log(JSON.stringify(result) + '\n\n\n\n\n\n')
+
+        if (err)
+         { console.error(err); res.send("Error " + err); }
+        else{
+          // console.log('success\n\n\n\n\n\n')
+          res.render('browse', { title: term, result:result.rows});
+          res.send
+        }
+      });
+    }
+  });
+})
 
 
 

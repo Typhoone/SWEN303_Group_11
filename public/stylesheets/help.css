@@ -1,0 +1,16 @@
+* {
+	font-family: "Helvetica"
+}
+
+ body {
+	background-color: #E6E6E6;
+ }
+
+ hr{
+ 	border: none !important;
+	height: 2px !important;
+	/* Set the hr color */
+	color: #666 !important; /* old IE */
+	background-color: #666 !important; /* Modern Browsers */
+	display: block;
+ }

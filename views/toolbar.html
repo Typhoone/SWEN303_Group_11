@@ -55,7 +55,7 @@
   </paper-toolbar>
   <paper-material id="main">
     <h2 id="welcome" class="invisible"></h2>
-    <hr>
+    <hr id="divider" class="invisible">
     <iron-collapse id="collapse"></iron-collapse>    
   </paper-material>
 </paper-material id="content">
@@ -90,6 +90,7 @@
     var signUpBtn = document.getElementById('sign-up-button');
     var signOutBtn = document.getElementById('sign-out-button');
     var welcomeText = document.getElementById('welcome');
+    var divider = document.getElementById('divider');
 
     var menu = document.getElementById('menu');
 
@@ -182,6 +183,7 @@
       if(currentSearch == ''){
         setTimeout(function(){ 
           collapse.innerHTML = noSearch.innerHTML;
+          divider.className = '';
           ensureOpened();
         }, animationDelay);
       }else{

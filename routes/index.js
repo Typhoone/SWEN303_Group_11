@@ -212,7 +212,7 @@ router.post('/productSubmit', function(req, res, next) {
 });
 
 router.get('/help', function(req, res, next) {
-  res.render('help', {title: 'Trader'});
+  res.render('help', {title: 'Help!'});
 });
 
 module.exports = router;

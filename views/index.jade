@@ -2,7 +2,23 @@ extends layout
 
 block content
 	include toolbar.html
-	link 
+	link(href="/stylesheets/help.css", rel="stylesheet")
+	link(href="/stylesheets/browse.css", rel="stylesheet")
+
+	h1 Check out our 3 most recent additions!
+	.col-xs-12
+		ul.list-inline
+			each val in result
+				li
+					a(href="/item?name="+val.itemname+"&imagename="+val.imagename+"&description="+val.description+"&stock="+val.stock+"&id="+val.id id=val.id)
+						- var image = val.imagename;
+						- var name = val.itemname;
+						- var description = val.description;
+						- var stock = val.stock;
+						img(src='images/' + image + '.jpg', alt="failed", class="img-thumbnail")
+						h4 #{name}
+		.col-xs-3
+
 	script.
 		getCookie = function(cname) {
 			var name = cname + "=";
@@ -21,7 +37,7 @@ block content
 
 		var currentUser = getCookie("username");
 		if(currentUser != ""){
-			//If there is already a user then the user has nvaigated to the sign in page manually and hasn't signed out of the previous user. In any case do nohting until the sign out button is pressed.
+			//If there is already a user then the user has navigated to the sign in page manually and hasn't signed out of the previous user. In any case do nohting until the sign out button is pressed.
 		}else{
 			var e = (!{JSON.stringify(email)});
 			var id = (!{JSON.stringify(ID)});

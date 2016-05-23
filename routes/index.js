@@ -155,7 +155,7 @@ router.get('/', function(req, res, next) {
                     res.send("Error " + err);
                 }
                 else{
-                    res.render('index', {title: 'Trader', result: result.rows});
+                    res.render('index', {title: 'Trader', result: result.rows, categories: categories});
                 }
             });
         }
@@ -163,13 +163,22 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/browse', function(req, res, next) {
+	  var category = req.param("category");
+	  var sql;
+
       pg.connect(DATABASE_URL, function(err, client, done){
         if(err){
             console.error(err);
             res.send("Error " + err);
         }
         else{
-            client.query('SELECT * FROM items', function(err, result){
+        	if (category == null) {
+        		sql = "SELECT * FROM items";
+        	} else {
+				sql = "SELECT * FROM items WHERE category='" + category + "'";
+        	}
+
+            client.query(sql, function(err, result){
                 done();
                 if(err){
                     console.error(err);

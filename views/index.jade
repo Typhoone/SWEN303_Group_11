@@ -19,6 +19,18 @@ block content
 						h4 #{name}
 		.col-xs-3
 
+	h6 &nbsp;
+	hr
+	h6 &nbsp;
+
+	.col-xs-12
+	ul.list-inline
+		each val in categories
+			li.categories
+				a(href="/browse?category=" + val)
+					h4 #{val}
+	.col-xs-3
+
 	script.
 		getCookie = function(cname) {
 			var name = cname + "=";

@@ -12,6 +12,18 @@
     margin-bottom: 10px;
  }
 
+ul {
+	display: block; text-align:center;
+}
+
+ul li {
+	display: inline-block;
+}
+
+li.categories {
+	width: 250px;
+}
+
 li {
 	background-color: lightgray;
 	border-radius: 10px;

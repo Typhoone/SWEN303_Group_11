@@ -28,29 +28,16 @@ router.get('/db', function (request, response) {
   });
 });
 
-router.get('/item', function(request, response){
-    pg.connect(DATABASE_URL, function(err, client, done){
-        if(err){
-            console.error(err);
-            response.send("Error " + err);
-        }
-        else{
-            client.query('Select * FROM test_table WHERE name = name', function(err, result){
-                done();
-                if(err){
-                    console.error(err);
-                    response.send("Error " + err);
-                }
-                else{
-                    var name = "Super awesome random object";
-                    var itemImage = "items";
-                    var description = "This is just a lot of informatoin about the object in general, at the moment all of this information is just a placeholder until i can write the rest of it.";
-                    response.render('Item', {result:result.rows, name: name, image: itemImage, description: description });
-                }
-            });
-        }
-    });
-  })
+router.get('/item', function(req, res, next) {
+
+    var name = req.param("name");
+    var imagename = req.param("imagename");
+    var description = req.param("description");
+    var stock = req.param("stock");
+    res.render('item', { title: 'item', name: name, image: imagename, description: description, stock: JSON.stringify(stock)});
+    res.send
+});
+
 
 
 //Load signup page

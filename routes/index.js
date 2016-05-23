@@ -43,7 +43,7 @@ router.get('/item', function(request, response){
                 }
                 else{
                     var name = "Super awesome random object";
-                    var itemImage = "items";
+                    var itemImage = "items.jpg";
                     var description = "This is just a lot of informatoin about the object in general, at the moment all of this information is just a placeholder until i can write the rest of it.";
                     response.render('item', {result:result.rows, name: name, image: itemImage, description: description });
                 }

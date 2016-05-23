@@ -2,7 +2,7 @@ extends layout
 
 block content
 	include toolbar.html
-	link(href="/stylesheets/sell.css", rel="stylesheet")
+	link(href="/stylesheets/form.css", rel="stylesheet")
 
 	script(type="text/javascript").
 		function validateForm() {
@@ -95,6 +95,6 @@ block content
 				input#image.form-control(type='file', accept='image/*', name="image")
 			#imageErr.alert.alert-danger.hidden
 				|Please upload an image of your product
-				
+
 			button.btn.btn-default(type="submit", name="submitBtn") Submit Product
 		.col-xs-3

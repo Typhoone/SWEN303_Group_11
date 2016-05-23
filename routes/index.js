@@ -177,7 +177,7 @@ router.get('/browse', function(req, res, next) {
 });
 
 router.get('/sell', function(req, res, next) {
-  res.render('sell', {title: 'Trader', categories: JSON.stringify(categories)});
+  res.render('sell', {title: 'Trader', categories: categories});
 });
 
 //run sell query
@@ -188,10 +188,10 @@ router.post('/productSubmit', function(req, res, next) {
   price = req.body.price;
   quantity = req.body.quantity;
   category = req.body.category;
-  //image = req.body.image;
+  image = req.body.image;
 
-  sql = escape("INSERT INTO items (id, userid, itemname, price, imagename, uploaddate, enddate, stock, description, category) VALUES (default,'" + userid + "','" + name  + "','" + price + "'," + "imagename" + ",'" + "uploaddate" + "','" + "enddate" + ",'" + quantity + ",'" + description + ",'" + category + "');");
-
+  sql = escape("INSERT INTO items (id, userid, itemname, price, imagename, uploaddate, enddate, stock, description, category) VALUES (default,'" + userid + "','" + name  + "','" + price + "','" + image + "'," + "LOCALTIMESTAMP" + "," + "LOCALTIMESTAMP" + ",'" + quantity + "','" + description + "','" + category + "');");
+  console.log(sql);
   pg.connect(DATABASE_URL, function(err, client, done) {
     if (err)
      { console.error(err); res.send("Error " + err); }

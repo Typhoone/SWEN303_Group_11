@@ -1,0 +1,9 @@
+ body {
+	background-color: #E6E6E6;
+ }
+
+form {
+	background-color: lightgray;
+	border-radius: 10px;
+	padding: 30px;
+}
